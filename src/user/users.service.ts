@@ -26,6 +26,6 @@ export class UsersService {
   }
 
   async updateUser(userId: string, userUpdates: UpdateUserDto) {
-    return this.usersRepository.findOrUpdate({ userId }, userUpdates);
+    return this.usersRepository.findAndUpdate({ userId }, userUpdates);
   }
 }
