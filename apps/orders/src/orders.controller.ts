@@ -7,6 +7,6 @@ export class OrdersController {
 
   @Get()
   getHello(): string {
-    return this.ordersService.getHello();
+    return 'hello';
   }
 }
