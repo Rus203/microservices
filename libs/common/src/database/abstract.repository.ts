@@ -6,6 +6,7 @@ import {
   Model,
   SaveOptions,
   UpdateQuery,
+  Types,
 } from 'mongoose';
 import { Logger, NotFoundException } from '@nestjs/common';
 
@@ -20,7 +21,10 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     document: Omit<TDocument, '_id'>,
     options?: SaveOptions,
   ): Promise<TDocument> {
-    const newDocument = new this.model(document);
+    const newDocument = new this.model({
+      ...document,
+      _id: new Types.ObjectId(),
+    });
     return (await newDocument.save(options)).toJSON() as TDocument;
   }
 

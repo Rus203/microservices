@@ -12,7 +12,8 @@ import { OrdersRepository } from './orders.repository';
     ConfigModule.forRoot({
       isGlobal: true,
       validationSchema: Joi.object({
-        MONGO_URI: Joi.string(),
+        MONGO_URI: Joi.string().required(),
+        PORT: Joi.number().required(),
       }),
       envFilePath: './apps/orders/.env',
     }),
