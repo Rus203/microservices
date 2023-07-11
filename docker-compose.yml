@@ -17,6 +17,27 @@ services:
     ports:
       - 3000:3000
 
+  billing:
+    build:
+      context: ./
+      dockerfile: ./apps/billing/Dockerfile
+      target: development
+    env_file:
+      - ./apps/billing/.env
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run start:dev billig
+    depends_on:
+      - mongodb-primary
+      - mongodb-secondary
+      - mongodb-arbiter
+
+  rabbitmq:
+    image: rabbitmq:3-alpine
+    ports:
+      - 5672:5672
+
   mongodb-primary:
     image: docker.io/bitnami/mongodb:6.0
     environment:
