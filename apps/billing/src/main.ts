@@ -4,8 +4,8 @@ import { RmqService } from '@app/common/rmq/rmq.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(BillingModule);
-  const rmqServices = app.get<RmqService>(RmqService);
-  app.connectMicroservice(rmqServices.getOptions('BILLING'));
+  const rmqService = app.get<RmqService>(RmqService);
+  app.connectMicroservice(rmqService.getOptions('BILLING'));
   await app.startAllMicroservices();
 }
 bootstrap();
