@@ -10,14 +10,14 @@ COPY . .
 
 RUN npm run build
 
-FROM node:18-alpine AS production
+FROM node:18-alpine as production
 
 ARG NODE_ENV=production
 
 ENV NODE_ENV=${NODE_ENV}
 
-RUN npm install --only=production
+RUN npm run build
 
-COPY --from=development /usr/src/app/dist ./dist
+COPY --from=development usr/src/app/dist ./dist
 
-CMD ["node", "dist/apps/orders/main"]
+CMD ["node", "dist/apps/billing/main"]
