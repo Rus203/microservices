@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM node:18-alpine as production
+FROM node:18-alpine AS production
 
 ARG NODE_ENV=production
 
