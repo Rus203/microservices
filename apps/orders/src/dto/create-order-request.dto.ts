@@ -1,5 +1,6 @@
 import {
   IsNotEmpty,
+  IsNumber,
   IsPhoneNumber,
   IsPositive,
   IsString,
@@ -11,6 +12,7 @@ export class CreateOrderRequest {
   name: string;
 
   @IsPositive()
+  @IsNumber()
   price: number;
 
   @IsPhoneNumber()
