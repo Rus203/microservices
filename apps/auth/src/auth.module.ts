@@ -21,6 +21,8 @@ import { JwtStrategy } from '../strategies';
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRATION: Joi.string().required(),
         MONGO_URI: Joi.string().required(),
+        RABBIT_MQ_URI: Joi.string().required(),
+        RABBIT_MQ_AUTH_QUEUE: Joi.string().required(),
       }),
     }),
     JwtModule.registerAsync({
