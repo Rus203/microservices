@@ -28,14 +28,14 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return (await newDocument.save(options)).toJSON() as TDocument;
   }
 
-  async find(entityFilterQuery: FilterQuery<TDocument>): Promise<TDocument[]> {
+  async find(entityFilterQuery: FilterQuery<TDocument>) {
     return this.model.find(entityFilterQuery, {}, { lean: true });
   }
 
   async findOne(
     entityFilterQuery: FilterQuery<TDocument>,
     projection?: Record<string, unknown>,
-  ): Promise<TDocument> {
+  ) {
     const document = await this.model.findOne(entityFilterQuery, projection, {
       lean: true,
     });
@@ -51,7 +51,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   async findOneAndUpdate(
     entityFilterQuery: FilterQuery<TDocument>,
     updatedData: UpdateQuery<TDocument>,
-  ): Promise<TDocument> {
+  ) {
     const document = await this.model.findOneAndUpdate(
       entityFilterQuery,
       updatedData,
@@ -72,7 +72,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   async upsert(
     entityFilterQuery: FilterQuery<TDocument>,
     updatedEntityData: Partial<TDocument>,
-  ): Promise<TDocument> {
+  ) {
     return this.model.findOneAndUpdate(entityFilterQuery, updatedEntityData, {
       new: true,
       lean: true,
